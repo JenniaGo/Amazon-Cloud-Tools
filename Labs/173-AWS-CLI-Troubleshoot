@@ -1,0 +1,58 @@
+# Connect via ssh to the Instance, then configure AWS CLI with access details (Lab details given for example)
+0.1. (enable permmision to the key) chmod 400 key-name.pem
+0.2. (Connect) ssh -i key-name.pem ec2-user@instance-ip
+
+# Set AWS CLI
+1. aws configure
+2. AWS Access Key ID [None]: AKIAXEABRA2NSKRYGGM4
+3. AWS Secret Access Key [None]: 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
+4. Default region name [None]: us-west-2
+5. Default output format [None]: json
+
+# Create instance via AWS CLI
+1. cd ~/sysops-activity-files/starters
+2. cp create-lamp-instance-v2.sh create-lamp-instance.backup
+3. vi create-lamp-instance-v2.sh
+
+# create-lamp-instance-v2.sh content:
+--iam-instance-profile Name=LabInstanceProfile \
+--profile $profile \
+--user-data file://create-lamp-instance-userdata-v2.txt )
+
+#if the create instance command failed, exit this script
+if [[ "$?" -ne "0" ]]; then
+  exit 1
+fi
+
+echo
+echo "Instance Details...."
+echo $instanceDetails | python -m json.tool
+
+# Extract instanceId
+instanceId=$(echo $instanceDetails | python -m json.tool | grep InstanceId | sed -n 1p | cut -d '"' -f4)
+echo "instanceId="$instanceId
+echo
+echo "Waiting for a public IP for the new instance..."
+pubIp=""
+while [[ "$pubIp" == "" ]]; do
+  sleep 10;
+  pubIp=$(aws ec2 describe-instances --instance-id $instanceId --region $region --profile $profile | grep PublicIp | sed -n 1p | cut -d '"' -f4)
+done
+
+echo
+echo "The public IP of your LAMP instance is: "$pubIp
+echo
+echo "Download the Key Pair from the Vocareum page."
+echo
+echo "Then connect using this command (with .pem or .ppk added to the end of the keypair name):"
+echo "ssh -i path-to/"$key" ec2-user@"$pubIp
+echo
+echo "The website should also become available at"
+echo "http://"$pubIp"/cafe/"
+
+echo
+DATE=`date '+%Y-%m-%d %H:%M:%S'`
+echo
+echo "Done running create-instance.sh at "$DATE
+echo
+
