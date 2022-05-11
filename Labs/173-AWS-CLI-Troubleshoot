@@ -9,7 +9,7 @@
 4. Default region name [None]: us-west-2
 5. Default output format [None]: json
 
-# Create instance via AWS CLI
+# Create instance via AWS CLI using create-lamp script (it had error and need to fix it with troubleshooting)
 1. cd ~/sysops-activity-files/starters
 2. cp create-lamp-instance-v2.sh create-lamp-instance.backup
 3. vi create-lamp-instance-v2.sh
