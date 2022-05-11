@@ -1,0 +1,170 @@
+## PART I ##
+1)  Define what IaaS, PaaS and SaaS is:
+Answer: Infrastructure as a service (IaaS) | Platform as a service (PaaS) | Software as a service (SaaS)
+
+a. Infrastructure as a Service (IaaS) contains the basic building blocks for cloud IT and typically provide access to networking features, computers (virtual or on dedicated hardware), and data storage space.
+IaaS provides you with the highest level of flexibility and management control over your IT resources and is very similar to the existing IT resources that many IT departments and developers are familiar with today.
+
+b. Platform as a Service (PaaS) removes the need for your organization to manage the underlying infrastructure (usually hardware and operating systems) and allows you to focus on the deployment and management of your applications.
+This helps you be more efficient as you don’t need to worry about resource procurement, capacity planning, software maintenance, patching, or any of the other undifferentiated heavy lifting involved in running your application.
+
+c. Software as a Service (SaaS) provides you with a completed product that is run and managed by the service provider. In most cases, people referring to Software as a Service are referring to end-user applications.
+With a SaaS offering you do not have to think about how the service is maintained or how the underlying infrastructure is managed; you only need to think about how you will use that piece of software.
+A common example of a SaaS application is web-based email which you can use to send and receive email without having to manage feature additions to the email product or maintain the servers and operating systems that the email program is running on.
+SaaS provides high availability, fault tolerance, scalability an elasticity.
+
+Link: https://digitalcloud.training/aws-cloud-computing-concepts/#cloud-computing-models
+
+2)  Provide 6 advantages of cloud computing:
+a. Trade fixed expense for variable expense – Instead of having to invest heavily in data centers and servers before you know how you’re going to use them, you can pay only when you consume computing resources, and pay only for how much you consume.
+b. Benefit from massive economies of scale – By using cloud computing, you can achieve a lower variable cost than you can get on your own. Because usage from hundreds of thousands of customers is aggregated in the cloud, providers such as AWS can achieve higher economies of scale, which translates into lower pay as-you-go prices.
+c. Stop guessing capacity – Eliminate guessing on your infrastructure capacity needs. When you make a capacity decision prior to deploying an application, you often end up either sitting on expensive idle resources or dealing with limited capacity. With cloud computing, these problems go away. You can access as much or as little capacity as you need, and scale up and down as required with only a few minutes’ notice.
+d. Increase speed and agility – In a cloud computing environment, new IT resources are only a click away, which means that you reduce the time to make those resources available to your developers from weeks to just minutes. This results in a dramatic increase in agility for the organization, since the cost and time it takes to experiment and develop is significantly lower.
+e. Stop spending money running and maintaining data centers – Focus on projects that differentiate your business, not the infrastructure. Cloud computing lets you focus on your own customers, rather than on the heavy lifting of racking, stacking, and powering servers.
+f. Go global in minutes – Easily deploy your application in multiple regions around the world with just a few clicks. This means you can provide lower latency and a better experience for your customers at minimal cost.
+
+Link: https://docs.aws.amazon.com/whitepapers/latest/aws-overview/six-advantages-of-cloud-computing.html
+
+3)  Define what an AWS region and an Availability Zone is.
+
+4)  List all the AWS regions:
+Code	     Name	          Opt-in Status
+us-east-2	US East (Ohio)	Not required
+us-east-1	US East (N. Virginia)	Not required
+us-west-1	US West (N. California)	Not required
+us-west-2	US West (Oregon)	Not required
+af-south-1	Africa (Cape Town)	Required
+ap-east-1	Asia Pacific (Hong Kong)	Required
+ap-southeast-3	Asia Pacific (Jakarta)	Required
+ap-south-1	Asia Pacific (Mumbai)	Not required
+ap-northeast-3	Asia Pacific (Osaka)	Not required
+ap-northeast-2	Asia Pacific (Seoul)	Not required
+ap-southeast-1	Asia Pacific (Singapore)	Not required
+ap-southeast-2	Asia Pacific (Sydney)	Not required
+ap-northeast-1	Asia Pacific (Tokyo)	Not required
+ca-central-1	Canada (Central)	Not required
+eu-central-1	Europe (Frankfurt)	Not required
+eu-west-1	Europe (Ireland)	Not required
+eu-west-2	Europe (London)	Not required
+eu-south-1	Europe (Milan)	Required
+eu-west-3	Europe (Paris)	Not required
+eu-north-1	Europe (Stockholm)	Not required
+me-south-1	Middle East (Bahrain)	Required
+sa-east-1	South America (São Paulo)	Not required
+
+Link: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-regions
+
+5)  What are the categories in which the AWS services are grouped? 
+6)  What is the difference between object storage and block storage?
+7)  List two AWS compute services and explain them.
+8)  List two AWS storage services and explain them.
+
+
+
+
+## PART II ##
+1)  Explain the AWS Shared responsibility model:
+Answer: The AWS shared responsibility model defines what you (as an AWS account holder/user) and AWS are responsible for when it comes to security and compliance.
+
+AWS are responsible for “Security of the Cloud”: AWS is responsible for protecting the infrastructure that runs all the services offered in the AWS Cloud.
+This infrastructure is composed of the hardware, software, networking, and facilities that run AWS Cloud services.
+Customers are responsible for “Security in the Cloud”: For EC2 this includes network level security (NACLs, security groups), operating system patches and updates, IAM user access management, and client and server-side data encryption.
+Examples  of shared controls include:
+
+Patch Management – AWS is responsible for patching and fixing flaws within the infrastructure, but customers are responsible for patching their guest OS and applications.
+Configuration Management – AWS maintains the configuration of its infrastructure devices, but a customer is responsible for configuring their own guest operating systems, databases, and applications.
+Awareness & Training – AWS trains AWS employees, but a customer must train their own employees.
+Customer Specific – Controls which are solely the responsibility of the customer based on the application they are deploying within AWS services. .
+
+Examples of customer specific controls include:
+
+Service and Communications Protection or Zone Security which may require a customer to route or zone data within specific security environments.
+Links:
+a. https://digitalcloud.training/aws-shared-responsibility-model/
+b. https://aws.amazon.com/compliance/shared-responsibility-model/
+c. https://aws.amazon.com/blogs/industries/applying-the-aws-shared-responsibility-model-to-your-gxp-solution/
+
+2)  Explain an Identity and Access Management (IAM) Role:
+Answer: Roles are created and then “assumed” by trusted entities and define a set of permissions for making AWS service requests.
+
+With IAM Roles you can delegate permissions to resources for users and services without using permanent credentials (e.g. user name and password).
+IAM users or AWS services can assume a role to obtain temporary security credentials that can be used to make AWS API calls.
+You can delegate using roles.
+There are no credentials associated with a role (password or access keys).
+IAM users can temporarily assume a role to take on permissions for a specific task.
+A role can be assigned to a federated user who signs in using an external identity provider.
+Temporary credentials are primarily used with IAM roles and automatically expire.
+Roles can be assumed temporarily through the console or programmatically with the AWS CLI, Tools for Windows PowerShell, or the API.
+
+IAM roles with EC2 instances:
+
+IAM roles can be used for granting applications running on EC2 instances permissions to AWS API requests using instance profiles.
+Only one role can be assigned to an EC2 instance at a time.
+A role can be assigned at the EC2 instance creation time or at any time afterwards.
+When using the AWS CLI or API instance profiles must be created manually (it’s automatic and transparent through the console).
+Applications retrieve temporary security credentials from the instance metadata.
+
+Links:
+a. https://digitalcloud.training/aws-identity-and-access-management/
+
+
+3)  Explain an Identity and Access Management (IAM) Policy:
+Answer: Policies are documents that define permissions and can be applied to users, groups, and roles.
+
+Policy documents are written in JSON (key value pair that consists of an attribute and a value).
+All permissions are implicitly denied by default.
+The most restrictive policy is applied.
+The IAM policy simulator is a tool to help you understand, test, and validate the effects of access control policies.
+The Condition element can be used to apply further conditional logic.
+
+Links:
+a. https://digitalcloud.training/aws-identity-and-access-management/
+
+4)  Describe an Amazon Machine Image (AMI):
+Answer: An Amazon Machine Image (AMI) is a supported and maintained image provided by AWS that provides the information required to launch an instance
+
+An AMI includes the following:
+One or more Amazon Elastic Block Store (Amazon EBS) snapshots, or, for instance-store-backed AMIs, a template for the root volume of the instance (for example, an operating system, an application server, and applications).
+Launch permissions that control which AWS accounts can use the AMI to launch instances.
+A block device mapping that specifies the volumes to attach to the instance when it's launched.
+
+Links: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html
+
+5)  List the different EC2 instance types with use cases for each type:
+Answer: Amazon EC2 provides the following purchasing options to enable you to optimize your costs based on your needs:
+
+a. On-Demand Instances – Pay, by the second, for the instances that you launch.
+b. Savings Plans – Reduce your Amazon EC2 costs by making a commitment to a consistent amount of usage, in USD per hour, for a term of 1 or 3 years.
+c. Reserved Instances – Reduce your Amazon EC2 costs by making a commitment to a consistent instance configuration, including instance type and Region, for a term of 1 or 3 years.
+d. Spot Instances – Request unused EC2 instances, which can reduce your Amazon EC2 costs significantly.
+e. Dedicated Hosts – Pay for a physical host that is fully dedicated to running your instances, and bring your existing per-socket, per-core, or per-VM software licenses to reduce costs.
+f. Dedicated Instances – Pay, by the hour, for instances that run on single-tenant hardware.
+g. Capacity Reservations – Reserve capacity for your EC2 instances in a specific Availability Zone for any duration.
+
+Pricing:
+On-Demand Instances
+Pay for the instances that you use by the second, with a minimum of 60 seconds, with no long-term commitments or upfront payments.
+
+Savings Plans
+You can reduce your Amazon EC2 costs by making a commitment to a consistent amount of usage, in USD per hour, for a term of 1 or 3 years.
+
+Reserved Instances
+You can reduce your Amazon EC2 costs by making a commitment to a specific instance configuration, including instance type and Region, for a term of 1 or 3 years.
+
+Spot Instances
+Request unused EC2 instances, which can reduce your Amazon EC2 costs significantly.
+
+
+Links:
+a. https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html
+b. https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
+c. https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html
+
+6)  Explain Virtual Private Cloud (VPC):
+Answer:Amazon Virtual Private Cloud (Amazon VPC) enables you to launch AWS resources into a virtual network that you've defined. This virtual network closely resembles a traditional network that you'd operate in your own data center, with the benefits of using the scalable infrastructure of AWS.
+
+7)  Differentiate between a Public and a Private subnet:
+Answer:
+
+Links:
+a.
