@@ -14,7 +14,7 @@
 2. cp create-lamp-instance-v2.sh create-lamp-instance.backup
 3. vi create-lamp-instance-v2.sh
 
-# create-lamp-instance-v2.sh content:
+## Content file: create-lamp-instance-v2.sh
 --iam-instance-profile Name=LabInstanceProfile \
 --profile $profile \
 --user-data file://create-lamp-instance-userdata-v2.txt )
@@ -55,4 +55,40 @@ DATE=`date '+%Y-%m-%d %H:%M:%S'`
 echo
 echo "Done running create-instance.sh at "$DATE
 echo
+## end of file create-lamp-instance-v2.sh
 
+## script Analyze:
+Line 1:
+
+This file is a bash file, so the first line contains #!/bin/bash
+Lines 7–11:
+
+The instance size is set to t3.small, which should be large enough to run the database and web server.
+Lines 16–29:
+
+The script invokes the AWS CLI describe-regions command to get a list of all AWS regions. In each region, it queries for an existing VPC that has the name Cafe VPC. When it finds it, it captures the vpc ID and region where the Café LAMP instance should be deployed and breaks out of the while loop.
+Lines 31–57:
+
+The script invokes AWS CLI commands to look up the Subnet ID, Keypair name, and AMI ID values that will be needed to create an EC2 instance.
+Notice on line 32 that the line ends with a backslash (\ ) character. This character can be used to wrap a single command on to another line in the script file. You will find that this technique is used many times in this script to make it easier to read.
+Lines 59–124:
+
+This part of the script cleans up the AWS account for situations where this script already ran on your AWS account, and it is now being run again. The script checks if an instance named cafeserver already exists, and if a security group that includes cafeSG in its name already exists. If either resource is found, the script prompts you to delete them.
+Lines 126–154:
+
+The script creates a new security group with ports 22 and 80 open.
+Lines 156–168:
+
+The script creates a new EC2 instance.
+Notice how the values set in lines 8 and 10 and the values collected in lines 16–57 are used in this AWS CLI call.
+Also, notice the reference to a user-data script.
+NOTE: You will be prompted to look at the details of the user-data file in a moment.
+
+While you are still in the bash script, look again at lines 157–168:
+
+The entire call to create the instance is captured in a variable that is named instanceDetails. The contents of this variable are then echoed out to the terminal on line 177, and they are formatted for easier viewing by using a Python JavaScript Object Notation (JSON) tool.
+Lines 179–188:
+
+The instanceId is parsed out of the instanceDetails, and then a while loop checks every 10 seconds to see if a public IP address has been assigned to the instance. When the check succeeds, the public IP address is written to the terminal.
+
+## End of Analyze
