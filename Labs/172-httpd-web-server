@@ -1,5 +1,7 @@
 
-#User data to initiate apache server:
+# Create VPC with public subnet with assigned IP + create instance inside
+# Open ssh port 22 + http port 80 in Security Group to allow access
+# add the script to UserData to initiate apache server:
 #! /bin/bash
 sudo yum update -y
 sudo yum install -y httpd
@@ -8,7 +10,7 @@ sudo systemctl enable httpd
 sudo chown -R ec2-user:apache /var/www
 sudo chmod 2775 /var/www
 
-#HTML test:
+# index.html template for test:
 <!DOCTYPE html>
 <html>
 <body>
@@ -21,7 +23,55 @@ sudo chmod 2775 /var/www
 </html>
 
 # Connect to Instance
-1. download ket-pair
+1. download key-pair
 2. change permmision to the key | chmod 400 key-name.pem
 3. Connect: ssh -i key-name.pem ec2-user@instance-ip
+5. check in /var/log/cloud-init-log ig httpd was installed successfully to verify
 4. deploy html page for test
+5. access instance-ip/index.html
+
+
+#cloud-init-log example:
+Installed size: 5.2 M
+Downloading packages:
+--------------------------------------------------------------------------------
+Total                                              9.9 MB/s | 1.9 MB  00:00     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : apr-1.7.0-9.amzn2.x86_64                                     1/9 
+  Installing : apr-util-bdb-1.6.1-5.amzn2.0.2.x86_64                        2/9 
+  Installing : apr-util-1.6.1-5.amzn2.0.2.x86_64                            3/9 
+  Installing : httpd-tools-2.4.53-1.amzn2.x86_64                            4/9 
+  Installing : generic-logos-httpd-18.0.0-4.amzn2.noarch                    5/9 
+  Installing : mailcap-2.1.41-2.amzn2.noarch                                6/9 
+  Installing : httpd-filesystem-2.4.53-1.amzn2.noarch                       7/9 
+  Installing : mod_http2-1.15.19-1.amzn2.0.1.x86_64                         8/9 
+  Installing : httpd-2.4.53-1.amzn2.x86_64                                  9/9 
+  Verifying  : apr-util-1.6.1-5.amzn2.0.2.x86_64                            1/9 
+  Verifying  : apr-util-bdb-1.6.1-5.amzn2.0.2.x86_64                        2/9 
+  Verifying  : mod_http2-1.15.19-1.amzn2.0.1.x86_64                         3/9 
+  Verifying  : httpd-filesystem-2.4.53-1.amzn2.noarch                       4/9 
+  Verifying  : httpd-tools-2.4.53-1.amzn2.x86_64                            5/9 
+  Verifying  : mailcap-2.1.41-2.amzn2.noarch                                6/9 
+  Verifying  : generic-logos-httpd-18.0.0-4.amzn2.noarch                    7/9 
+  Verifying  : httpd-2.4.53-1.amzn2.x86_64                                  8/9 
+  Verifying  : apr-1.7.0-9.amzn2.x86_64                                     9/9 
+
+Installed:
+  httpd.x86_64 0:2.4.53-1.amzn2                                                 
+
+Dependency Installed:
+  apr.x86_64 0:1.7.0-9.amzn2                                                    
+  apr-util.x86_64 0:1.6.1-5.amzn2.0.2                                           
+  apr-util-bdb.x86_64 0:1.6.1-5.amzn2.0.2                                       
+  generic-logos-httpd.noarch 0:18.0.0-4.amzn2                                   
+  httpd-filesystem.noarch 0:2.4.53-1.amzn2                                      
+  httpd-tools.x86_64 0:2.4.53-1.amzn2                                           
+  mailcap.noarch 0:2.1.41-2.amzn2                                               
+  mod_http2.x86_64 0:1.15.19-1.amzn2.0.1                                        
+
+Complete!
+Created symlink from /etc/systemd/system/multi-user.target.wants/httpd.service to /usr/lib/systemd/system/httpd.service.
+Cloud-init v. 19.3-45.amzn2 finished at Wed, 11 May 2022 07:17:20 +0000. Datasource DataSourceEc2.  Up 25.71 seconds
