@@ -1,0 +1,27 @@
+
+#User data to initiate apache server:
+#! /bin/bash
+sudo yum update -y
+sudo yum install -y httpd
+sudo systemctl start httpd
+sudo systemctl enable httpd
+sudo chown -R ec2-user:apache /var/www
+sudo chmod 2775 /var/www
+
+#HTML test:
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>YOUR-NAME's re/Start Project Work</h1>
+
+<p>EC2 Instance Challenge Lab</p>
+
+</body>
+</html>
+
+# Connect to Instance
+1. download ket-pair
+2. change permmision to the key | chmod 400 key-name.pem
+3. Connect: ssh -i key-name.pem ec2-user@instance-ip
+4. deploy html page for test
