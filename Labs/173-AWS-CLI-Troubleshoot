@@ -14,7 +14,7 @@
 2. cp create-lamp-instance-v2.sh create-lamp-instance.backup
 3. vi create-lamp-instance-v2.sh
 
-## Content file: create-lamp-instance-v2.sh
+##### Content file before fix: create-lamp-instance-v2.sh #######
 --iam-instance-profile Name=LabInstanceProfile \
 --profile $profile \
 --user-data file://create-lamp-instance-userdata-v2.txt )
@@ -91,4 +91,19 @@ Lines 179–188:
 
 The instanceId is parsed out of the instanceDetails, and then a while loop checks every 10 seconds to see if a public IP address has been assigned to the instance. When the check succeeds, the public IP address is written to the terminal.
 
-## End of Analyze
+########### End of Analyze #########
+
+# Try to run the script: ./create-lamp-instance-v2.sh
+# Error output:  "An error occurred (InvalidAMIID.NotFound) when calling the RunInstances operation: The image id '[ami-xxxxxxxxxx]' does not exist"
+
+#First Answer: the region is hardcodded in the script, replace him with var @region
+
+# Second Issue: Key-pair is not writen in run-instance
+# Answer: add to the command: --key-name $key
+
+# Thirdssue: Port is not right
+# Answer:
+
+
+
+
